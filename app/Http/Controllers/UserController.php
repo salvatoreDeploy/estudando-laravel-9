@@ -15,6 +15,15 @@ class UserController extends Controller
     }
 
     public function show($id){
-        dd('users.show', $id);
+      // $user = User::where('id', '=', $id)->first(); Usando o metodo first()
+
+     if(!$user = User::find($id)){
+       // return redirect()->back();
+       // return back();
+       // return redirect()->route('users.index');
+       return view('users.error404');
+     }
+
+     return view('users.show', compact('user'));
     }
 }

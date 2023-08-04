@@ -3,7 +3,7 @@
 <ul>
     @foreach($users as $user)
         <li>
-            {{$user->name}} - {{$user->email}}
+            {{$user->name}} - {{$user->email}} | <a href="{{ route('users.show', ['id' => $user->id])}}">Detalhe</a>
         </li>
     @endforeach
 </ul>
