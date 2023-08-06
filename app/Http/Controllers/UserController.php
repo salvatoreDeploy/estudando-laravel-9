@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeUserFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,20 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(){
-        dd('Cadastrando um novo usuario');
+    public function store(storeUserFormRequest $request){
+        /*
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        */
+
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
+
+        $user = User::create($data);
+
+        return redirect()->route('users.show', $user->id);
     }
 }
