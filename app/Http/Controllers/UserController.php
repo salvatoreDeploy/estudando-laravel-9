@@ -48,4 +48,25 @@ class UserController extends Controller
 
         return redirect()->route('users.show', $user->id);
     }
+
+    public function edit($id){
+        if(!$user = User::find($id)){
+
+            return view('users.error403');
+          }
+
+        return view('users.edit', compact('user'));
+    }
+
+
+    public function update(Request $request,$id){
+        if(!$user = User::find($id)){
+
+            return view('users.error403');
+          }
+
+        // return view('users.edit', compact('user'));
+
+        dd($request->all());
+    }
 }

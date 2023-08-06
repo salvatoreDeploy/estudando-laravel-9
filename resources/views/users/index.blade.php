@@ -5,12 +5,14 @@
 @section('content')
     <h1>Listagem de Usuarios</h1>
 
+    <a href="{{ route('users.create')}}">Cria Usuario</a>
+
     <ul>
         @foreach($users as $user)
             <li>
                 {{$user->name}} - {{$user->email}} |
                 <a href="{{ route('users.show', ['id' => $user->id])}}">Detalhe</a> |
-                <a href="{{ route('users.create')}}">Cria Usuario</a>
+                <a href="{{ route('users.edit', ['id' => $user->id])}}">Editar Usuario</a>
             </li>
         @endforeach
     </ul>
