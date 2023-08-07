@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\storeUserFormRequest;
+use App\Http\Requests\updateUserFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -59,14 +60,25 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request,$id){
+    public function update(storeUserFormRequest $request,$id){
         if(!$user = User::find($id)){
 
             return view('users.error403');
           }
 
-        // return view('users.edit', compact('user'));
+         /*
+          $user->name = $request->name;
+          $user->email = $request->get('email');
+          $user->save();
+          */
+          $data = $request->only('name', 'email');
 
-        dd($request->all());
+          if($request->password){
+            $data['password'] =bcrypt($request->password);
+          }
+
+          $user->update($data);
+
+         return redirect()->route('users.index');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class storeUserFormRequest extends FormRequest
+class updateUserFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class storeUserFormRequest extends FormRequest
     {
         $id = $this->id;
 
-        $rules =  [
+        return [
             'name' => 'required|string|max:25|min:3',
             'email' => [
                 'required',
@@ -38,15 +38,5 @@ class storeUserFormRequest extends FormRequest
                 'max:8'
             ]
         ];
-
-        if($this->method('PUT')) {
-            $rules['password'] = [
-                'nullable',
-                'min:6',
-                'max:8'
-            ];
-        }
-
-        return $rules;
     }
 }
