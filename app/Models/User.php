@@ -56,4 +56,13 @@ class User extends Authenticatable
     public function userComments(){
         return $this->hasMany(Comment::class, 'user_id', 'id');
     }
+
+    public function searchUserComments(string $search = null)
+    {
+        return $this->userComments()->where(function ($query) use ($search) {
+            if ($search) {
+                $query->where('comment', 'LIKE', "%{$search}%");
+            }
+        })->get();
+    }
 }

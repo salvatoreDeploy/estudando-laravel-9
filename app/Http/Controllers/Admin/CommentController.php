@@ -18,13 +18,16 @@ class CommentController extends Controller
         $this->user = $user;
     }
 
-    public function index($userId){
+    public function index(Request $request, $userId){
 
         if(!$user = $this->user->find($userId)){
             return redirect()->back();
         }
 
-        $comments = $user->userComments()->get();
+        //$comments = $user->userComments()->where('comment', 'LIKE', "%{$request->search}%")->get();
+
+        $comments = $user->searchUserComments(search: $request->search ?? '');
+
 
         return view('users.comments.index', compact('user', 'comments'));
     }
@@ -49,5 +52,15 @@ class CommentController extends Controller
         ]);
 
         return redirect()->route('comments.index', $user->id);
+    }
+
+    public function edit($userId, $id){
+        if(!$comment = $this->comment->find($id)){
+            return redirect()->back();
+        }
+
+        $user = $comment->user;
+
+        return view('users.comments.edit', compact('user', 'comment'));
     }
 }
