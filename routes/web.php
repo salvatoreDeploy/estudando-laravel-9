@@ -14,6 +14,7 @@ Route::delete('/users/{id}', [UserController::class, 'delete'])->name('users.del
 
 Route::get('/users/{id}/comments/create', [CommentController::class, 'create'])->name('comments.create');
 Route::get('/users/{user}/comments/edit/{id}', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/users/comments/edit/{id}', [CommentController::class, 'update'])->name('comments.update');
 Route::get('/users/{id}/comments', [CommentController::class, 'index'])->name('comments.index');
 Route::post('/users/{id}/comments', [CommentController::class, 'store'])->name('comments.store');
 
