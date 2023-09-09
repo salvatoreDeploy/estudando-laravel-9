@@ -49,6 +49,12 @@
                 @foreach($users as $user)
                     <tr>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            @if ($user->image)
+                                <img src="{{ "storage/{$user->image}" }}" alt="{{ $user->name }}" class="object-cover w-16 h-16 rounded-full">
+                            @else
+                                <img src="{{"images/default.jpg"}}" alt="" class="object-cover w-16 h-16 rounded-full">
+                            @endif
+
                             {{ $user->name }}
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->email }}</td>

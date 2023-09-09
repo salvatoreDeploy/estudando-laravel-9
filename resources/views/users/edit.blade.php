@@ -8,7 +8,7 @@
 
     @include('components.validations-form')
 
-    <form action="{{ route('users.update', $user->id) }}" method="post">
+    <form action="{{ route('users.update', $user->id) }}" method="post" enctype="multipart/form-data">
         @method('PUT')
         @include('components.form')
     </form>
