@@ -8,6 +8,10 @@
             Cria Usuario
         </a>
     </h1>
+    <form action="{{route('logout')}}" method="post">
+        @csrf
+       <button class="bg-red-900 rounded-full text-white px-4 py-2 text-sm">Logout</button>
+    </form>
 
     <form action="{{ route('users.index') }}" method="GET" class="py-5">
         <input type="text" name="search" placeholder="Perquisar"
